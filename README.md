@@ -1,14 +1,17 @@
 # Validation-free-age-calibration
-This repository contains R code and TMB (Template Model Builder) source files for fitting close-kin mark-recapture (CKMR) models that account for errors-in-variables. These models are designed to estimate demographic parameters, such as population size, from genetic kinship data while explicitly acknowledging and correcting for uncertainty in relatedness assignments.
+
+This repository contains R code and TMB (Template Model Builder) source files for fitting 
+close-kin mark-recapture (CKMR) models that account for errors in chronological age 
+measurements.
 
 ---
 
 ## Key Features
 
 * **TMB-based Estimation:** Utilizes TMB for fast and robust maximum likelihood estimation of model parameters.
-* **Errors-in-Variables (EIV) Framework:** Explicitly models and corrects for potential errors in kinship assignments, leading to more accurate and less biased population estimates.
+* **Errors-in-Variables (EIV) Framework:** Explicitly models and corrects for potential errors in 
+chronological age leading to more accurate and less biased population estimates.
 * **CKMR Analysis:** Provides a complete workflow for analyzing kinship data to infer demographic quantities.
-* **Modular Code:** Organized R and C++ files for ease of understanding and modification.
 
 ---
 
@@ -62,6 +65,7 @@ R
 
 source("R/model_functions.R") # Assumes a file with helper functions exists
 source("main.R")
+```
 
 The Model
 
