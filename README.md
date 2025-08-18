@@ -29,7 +29,7 @@ You can install the required packages in R with the following command:
 install.packages(c("TMB", "Rcpp", "Matrix"))
 Repository Structure
 The repository is organized as follows:
-```
+
 
 .
 ├── R/                  # R functions for data preparation, model fitting, and plotting results.
@@ -62,9 +62,24 @@ R
 
 source("R/model_functions.R") # Assumes a file with helper functions exists
 source("main.R")
+
 The Model
+
 The statistical model is a TMB implementation of a capture-recapture likelihood, with the crucial addition of an errors-in-variables component. The model likelihood is based on the joint probability of observing a set of kinship pairs (k) given the true but unknown population size (N). The core of the model revolves around a likelihood function L that integrates over the uncertainty in the true relationship types.
 
 $$L(N, \theta | \text{data}) = \sum_{r} P(\text{data} | r) \cdot P(r | N, \theta) 
 
-$$where $r$ is the true relationship type (e.g., Parent-Offspring, Full-Sibling), $P(\\text{data} | r)$ is the probability of the observed data given a true relationship, and $P(r | N, \\theta)$ is the expected frequency of that relationship type in the population. This approach is particularly powerful because it uses the full genetic data to infer both the population size and the parameters of the EIV model, such as the probabilities of correctly identifying different kinship types. ----- ## Output and Interpretation Upon successful fitting, the model output will provide: * **Parameter Estimates:** Maximum likelihood estimates for population size ($N$) and other model parameters. * **Standard Errors:** Associated standard errors for all estimated parameters, derived from the Hessian matrix. * **AIC/BIC:** Information criteria for model comparison. * **Convergence Diagnostics:** Reports on whether the model converged successfully. The R functions in the `R/` folder will help you visualize these results, including confidence intervals and diagnostic plots. ----- ## Contributing We welcome contributions\! If you have suggestions for new features, bug fixes, or improved documentation, please open an issue or submit a pull request. ----- ## License This project is licensed under the MIT License. See the `LICENSE` file for details. ``` ```$$
+$$where $r$ is the true relationship type (e.g., Parent-Offspring, Full-Sibling), $P(\\text{data} | r)$ is the probability of the observed data given a true relationship, and $P(r | N, \\theta)$ is the expected frequency of that relationship type in the population. This approach is particularly powerful because it uses the full genetic data to infer both the population size and the parameters of the EIV model, such as the probabilities of correctly identifying different kinship types. 
+
+----- 
+
+## Output and Interpretation Upon successful fitting, the model output will provide: 
+* **Parameter Estimates:** Maximum likelihood estimates for population size ($N$) and other model parameters. 
+* **Standard Errors:** Associated standard errors for all estimated parameters, derived from the Hessian matrix. 
+* **AIC/BIC:** Information criteria for model comparison. 
+* **Convergence Diagnostics:** Reports on whether the model converged successfully. The R functions in the `R/` folder will help you visualize these results, including confidence intervals and diagnostic plots. 
+----- 
+
+
+
+## License This project is licensed under the MIT License. See the `LICENSE` file for details. ``` ```$$
