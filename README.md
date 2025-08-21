@@ -2,78 +2,42 @@
 
 This repository contains R code and TMB (Template Model Builder) source files for fitting 
 close-kin mark-recapture (CKMR) models that account for errors in chronological age 
-measurements.
+measurements. Referred to as auto-calibration. Repository contains analytical scripts
+used to generate the results for the manuscript "Validation-free estimation of chronological 
+age via close-kin". The repo. also contains a test run to see how the method works,
+used and summarised.
 
 ---
 
 ## Key Features
 
-* **TMB-based Estimation:** Utilizes TMB for fast and robust maximum likelihood estimation of model parameters.
-* **Errors-in-Variables (EIV) Framework:** Explicitly models and corrects for potential errors in 
-chronological age leading to more accurate and less biased population estimates.
-* **CKMR Analysis:** Provides a complete workflow for analyzing kinship data to infer demographic quantities.
+* **TMB-based Estimation:** Utilizes TMB for fast maximum likelihood estimation of model parameters 
+and standard errors using algorithmic differentiation.
+* **Aging uncertainty** Explicitly models mean and variance structures between noisy age and
+chronological age leading to more accurate and less biased population demographic estimates.
+* **CKMR incorporated:** Provides a workflow for analyzing CKMR data to infer demographic quantities given this uncertain age model.
 
 ---
 
 ## Requirements
 
-The code is built and tested in R. To use this project, you will need:
+The code is built and tested in R. To run the 'test', you will need the following installed:
 
 * **R:** A recent version of the R statistical software.
 * **R Packages:**
     * `TMB`: The core package for compiling and running the statistical models.
-    * `Matrix`: Required by TMB.
-    * `Rcpp`: For compiling the C++ code.
-    * `data.table` or `dplyr`: For efficient data manipulation (recommended but not strictly required by the model).
+    * `mgcv`: For setting up smooth matrices.
+    * `dplyr`: For efficient data manipulation (recommended but not strictly required by the model).
+    * `dplyr`: Helps with some faster matrix sampling and calculations.
+    * 'offarray' and 'mvbutils': From the MVB CKMR universe.
+        options(repos = unique( c(
+                 mvb = 'https://markbravington.r-universe.dev',
+                 getOption( 'repos')[ 'CRAN']
+                )))
+        install.packages( "offarray")
 
-You can install the required packages in R with the following command:
 
-```R
-install.packages(c("TMB", "Rcpp", "Matrix"))
-Repository Structure
-The repository is organized as follows:
-
-
-.
-├── R/                  # R functions for data preparation, model fitting, and plotting results.
-├── src/                # TMB C++ source files (.cpp) containing the core model logic.
-├── data/               # Placeholder for example data.
-├── README.md           # This file.
-├── LICENSE             # The repository license.
-└── main.R              # An example script demonstrating how to run the model.
-Getting Started
-Follow these steps to set up the environment and run the model.
-
-Clone the repository:
-
-Bash
-
-git clone [https://github.com/your-username/your-repository-name.git](https://github.com/your-username/your-repository-name.git)
-cd your-repository-name
-Compile the TMB Model:
-Open R and navigate to the project directory. The TMB::compile function will create a dynamic library from the C++ source file.
-
-R
-
-library(TMB)
-compile("src/eiv_ckmr.cpp") # Change filename if different
-dyn.load(TMB::dynlib("src/eiv_ckmr"))
-Run an Example Analysis:
-The main.R script provides a full working example. It will load an example dataset, prepare it for the model, fit the model, and print a summary of the results.
-
-R
-
-source("R/model_functions.R") # Assumes a file with helper functions exists
-source("main.R")
-```
-
-The Model
-
-The statistical model is a TMB implementation of a capture-recapture likelihood, with the crucial addition of an errors-in-variables component. The model likelihood is based on the joint probability of observing a set of kinship pairs (k) given the true but unknown population size (N). The core of the model revolves around a likelihood function L that integrates over the uncertainty in the true relationship types.
-
-$$L(N, \theta | \text{data}) = \sum_{r} P(\text{data} | r) \cdot P(r | N, \theta) 
-
-$$where $r$ is the true relationship type (e.g., Parent-Offspring, Full-Sibling), $P(\\text{data} | r)$ is the probability of the observed data given a true relationship, and $P(r | N, \\theta)$ is the expected frequency of that relationship type in the population. This approach is particularly powerful because it uses the full genetic data to infer both the population size and the parameters of the EIV model, such as the probabilities of correctly identifying different kinship types. 
+## Directory contents
 
 ----- 
 
