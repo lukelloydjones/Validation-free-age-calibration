@@ -43,7 +43,7 @@ kin.hsp <- kin[kin$isHSP, ]
 all.sub <- all[, c("RegID.1", "Year_Collected", "Rings_Jan")]
 p <- all.sub %>%
   ggplot( aes(x=Rings_Jan)) + xlab("Vertebral age") + ylab("Count") +
-  geom_histogram( color="#e9ecef", alpha=0.6, position = 'identity') +
+  geom_histogram(color = "#e9ecef", alpha = 0.6, position = 'identity') +
   theme_web_classic() +
   labs(fill = "")
 

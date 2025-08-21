@@ -566,8 +566,5 @@ res.s.key["log_c", "Estimate"] <- exp(res.s.key["log_c", "Estimate"])
 res.s.key.r <- round(res.s.key, 2)
 kable(t(res.s.key.r), format = "latex")
 
-
-
-
 res.s.key <- data.frame(res.s[c("N0_ad", "Z1", "alpha", "beta", "bp", "log_sig_ga", "log_c"), ])
 
