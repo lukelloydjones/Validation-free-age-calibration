@@ -14,8 +14,12 @@ used and summarised.
 * **TMB-based Estimation:** Utilizes TMB for fast maximum likelihood estimation of model parameters 
 and standard errors using algorithmic differentiation.
 * **Aging uncertainty** Explicitly models mean and variance structures between noisy age and
-chronological age leading to more accurate and less biased population demographic estimates.
-* **CKMR incorporated:** Provides a workflow for analyzing CKMR data to infer demographic quantities given this uncertain age model.
+chronological age leading to better estimates population demographic parameters.
+* **CKMR incorporated:** Provides a workflow for analyzing CKMR data under a half-sibling 
+pair model to infer demographic quantities given this uncertain age model.
+
+## Model
+
 
 ---
 
@@ -28,8 +32,8 @@ The code is built and tested in R. To run the 'test', you will need the followin
     * `TMB`: The core package for compiling and running the statistical models.
     * `mgcv`: For setting up smooth matrices.
     * `dplyr`: For efficient data manipulation (recommended but not strictly required by the model).
-    * `dplyr`: Helps with some faster matrix sampling and calculations.
-    * 'offarray' and 'mvbutils': From the MVB CKMR universe.
+    * `Rfast`: Helps with some faster matrix sampling and calculations.
+    * 'offarray' and 'mvbutils': From the MVB CKMR univeRse.
         options(repos = unique( c(
                  mvb = 'https://markbravington.r-universe.dev',
                  getOption( 'repos')[ 'CRAN']
@@ -39,15 +43,11 @@ The code is built and tested in R. To run the 'test', you will need the followin
 
 ## Directory contents
 
------ 
+* **rscripts/**
+    *
 
-## Output and Interpretation Upon successful fitting, the model output will provide: 
-* **Parameter Estimates:** Maximum likelihood estimates for population size ($N$) and other model parameters. 
-* **Standard Errors:** Associated standard errors for all estimated parameters, derived from the Hessian matrix. 
-* **AIC/BIC:** Information criteria for model comparison. 
-* **Convergence Diagnostics:** Reports on whether the model converged successfully. The R functions in the `R/` folder will help you visualize these results, including confidence intervals and diagnostic plots. 
------ 
+* **cpp/**
+    *
 
-
-
-## License This project is licensed under the MIT License. See the `LICENSE` file for details. ``` ```$$
+* **test/**
+    *
