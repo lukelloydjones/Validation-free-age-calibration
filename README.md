@@ -44,7 +44,8 @@ The code is built and tested in R. To run the 'test', you will need the followin
 ## Directory contents
 
 * **rscripts/**
-    *
+    * autocal/
+    * simulations_v2/
 
 * **cpp/**
     *
